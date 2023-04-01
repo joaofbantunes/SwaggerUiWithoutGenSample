@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: |-
+    This is a Sample API
+  version: 1.0.0
+servers:
+  - url: /v1
+tags:
+  - name: things
+    description: Because I have a lot of imagination, here's things!
+paths:
+  /things:
+    post:
+      tags:
+        - things
+      summary: Create a thing
+      description: Create a new thing
+      operationId: createThing
+      requestBody:
+        description: Create a thing
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateThing'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateThingResponse'
+        '400':
+          description: Invalid thing supplied
+
+components:
+  schemas:
+    CreateThing:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Awesome thing
+        description:
+          type: string
+          example: This is an awesome thing we can use for doing other things
+        acquiredAt:
+          type: string
+          format: date
+          example: 2023-03-21
+    CreateThingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 2138263d-4923-4463-b736-e2f8f2e196e4
+        name:
+          type: string
+          example: Awesome thing
+        description:
+          type: string
+          example: This is an awesome thing we can use for doing other things
+        acquiredAt:
+          type: string
+          format: date
+          example: 2023-03-21
+
